@@ -1,75 +1,75 @@
-# React + TypeScript + Vite
+# ⚗ SCHMS
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Science & Chemistry Hands-on Molecular Simulator**
+Un laboratoire de chimie virtuel et gamifié pour apprendre la chimie en manipulant, pas en mémorisant.
 
-Currently, two official plugins are available:
+## Le problème
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Beaucoup d'élèves peinent en chimie parce qu'ils doivent retenir des symboles, des formules et des équations sans comprendre comment elles se construisent.
 
-## React Compiler
+## La solution
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+SCHMS met l'élève dans un vrai labo : il verse des réactifs dans des tubes à essai, les mélange, observe la réaction, puis équilibre lui-même l'équation-bilan avec un comptage d'atomes en direct.
 
-## Expanding the ESLint configuration
+## Fonctionnalités actuelles
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Étagère de 15 réactifs (H₂, O₂, N₂, Cl₂, C, S, Fe, Cu, Zn, Al, Mg, Ca, Na, K, Li)
+- Deux tubes à essai et un mélange animé (tremblement, flash, fumée)
+- 22 réactions pilotées par des données
+- Équilibreur d'équations avec tableau de comptage des atomes (✓ / ✗)
+- Vérification de la forme la plus simple des coefficients
+- Missions, points d'expérience et niveaux
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Technologies
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+React · TypeScript · Vite · CSS
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Lancer le projet
 
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+## Structure
+src/
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+├─ data/lab.ts réactifs, réactions, missions
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+├─ engine/chemistry.ts moteur chimique (indépendant de l’interface)
 
+├─ components/ Bench, BalancePanel, Formula
+
+├─ App.tsx
+
+└─ App.css
+
+
+Le moteur chimique est séparé de l'affichage : on peut changer le design sans toucher aux règles scientifiques.
+
+## Ajouter une réaction
+
+Dans `src/data/lab.ts` :
+
+```ts
+{ reactants: ["Ca", "O2"], products: ["CaO"], coefficients: [2, 1, 2] }
 ```
+
+Puis la couleur du produit dans `productColors`.
+
+## Feuille de route
+
+- [ ] Mascotte-guide qui encourage et donne des indices
+- [ ] Sons et effets propres à chaque réaction
+- [ ] Constructeur moléculaire 3D
+- [ ] Parcours collège et lycée alignés sur les programmes togolais
+- [ ] Mode BEPC / BAC
+- [ ] Comptes, progression et suivi pédagogique
+- [ ] Mode hors-ligne
+
+## Avertissement
+
+Certaines réactions sont des simplifications pédagogiques. Les contenus doivent être validés par des enseignants avant un usage en classe.
+
+## Licence
+MIT.
